@@ -1,0 +1,15 @@
+version: '2'
+services:
+  glowroot:
+    build: .
+    depends_on:
+      - cassandra
+    ports:
+      - "8181:8181"
+      - "4000:4000"
+    links:
+      - cassandra
+  cassandra:
+    image: docker.io/cassandra
+    volumes:
+      - /elasticsearch/logs/cassandra:/var/lib/cassandra
